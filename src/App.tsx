@@ -4,6 +4,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import SignLayout from './pages/authentication/signLayout';
 import SignIn from './pages/authentication/signin';
 import SignUp from './pages/authentication/signup';
+import HomeLayout from './pages/home/homeLayout';
 
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
         <Route path="/" element={<SignLayout />}>
           <Route index element={<SignIn />} ></Route>
           <Route path="/sign-up" element={<SignUp />} ></Route>
+        </Route>
+        <Route path="/home" element={<HomeLayout />}>
+          
         </Route>
       </Routes>
     </HashRouter>

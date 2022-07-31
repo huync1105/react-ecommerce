@@ -10,7 +10,8 @@ module.exports = {
         'sign-light-green': '#E7FDDC',
         'sign-dark-brown': '#B79175',
         'sign-dark-green': '#61884F',
-        'c-light-brown': '#F8EFE9'
+        'c-light-brown': '#F8EFE9',
+        'c-dark-brown': '#604837',
       }
     },
   },
