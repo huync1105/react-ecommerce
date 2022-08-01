@@ -39,12 +39,12 @@ export default function Item(props: ItemProps) {
         {countPercent(props.price, props.sellUpPrice)}%
       </div>
       <Button
-        className="absolute top-0 right-0 text-c-dark-brown text-2xl"
+        className="absolute top-0 right-0 text-c-dark-brown bg-white text-2xl"
         showIcon={true}
         icon="fas fa-cart-plus"
       />
       <div
-        className={`item-img w-full h-72 2xl:h-72 lg:h-52 overflow-hidden mb-4`}
+        className={`item-img w-full h-72 2xl:h-72 lg:h-52 sm:h-40 h-40 overflow-hidden mb-4`}
         style={itemImgStyle}
       ></div>
       <div className={`item-content p-3`}>

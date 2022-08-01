@@ -1,0 +1,4 @@
+.child-tab {
+  transform: translateX(-50%);
+  transition: all ease 0.2s;
+}

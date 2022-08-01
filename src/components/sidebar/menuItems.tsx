@@ -1,3 +1,8 @@
+import { useState } from "react";
+import Button from "../button/button";
+import "./menu-item.css"
+import SubMenu from "./submenu";
+
 export default function MenuItems(props: any) {
 
   let items = props.listItem;
@@ -32,7 +37,10 @@ export default function MenuItems(props: any) {
     //   ]
     // },
   ]
-  
+  const [isInChild, setIsInChild] = useState(false);
+  const [subItem, setSubItem] = useState({});
+
+
   const mapItems = () => {
     bigCategory.forEach((item: any) => {
       item.child = items.filter((ele: any) => ele.group === item.group);
@@ -40,9 +48,14 @@ export default function MenuItems(props: any) {
     // console.log("bigCategory", bigCategory);
   }
   mapItems();
+
+  const changeTab = (e?: any) => {
+    setIsInChild(!isInChild);
+    if (e) setSubItem(e);
+  }
   
   return (
-    <div className={`flex ${props.className}`}>
+    <div className={`flex ${isInChild?"child-tab":""} ${props.className}`}>
       <div className="w-1/2 pr-3">
         {
           bigCategory.map((category: any) => {
@@ -54,7 +67,8 @@ export default function MenuItems(props: any) {
                     return (
                       <div 
                         key={child._id}
-                        className="flex justify-between items-center py-2"
+                        className="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+                        onClick={() => {changeTab(child)}}
                       >
                         <span>{child.name}</span>
                         <i className="fas fa-angle-right"></i>
@@ -67,9 +81,45 @@ export default function MenuItems(props: any) {
             )
           })
         }
+        <div className="my-2">
+          <h2 className="text-xl font-semibold py-2">Trợ giúp & Cài đặt</h2>
+          <div 
+            className="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+          >
+            <span>Tài khoản của bạn</span>
+            <i className="fas fa-angle-right"></i>
+          </div>
+          <div 
+            className="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+          >
+            <span>Đăng xuất</span>
+            <i className="fas fa-angle-right"></i>
+          </div>
+        </div>
       </div>
-      <div className="w-1/2 pl-3 bg-slate-600 sub-menu">
-        Alo
+      <div className="w-1/2 relative pl-3 bg-c-light-brown sub-menu">
+        <div 
+          className="w-full left-0 flex justify-between items-center py-2 pr-3 cursor-pointer"
+          style={{marginLeft: "-0.75rem"}}
+          onClick={changeTab}
+        >
+          <Button 
+            className=""
+            showIcon={true}
+            icon="fas fa-arrow-left"
+            label="Quay lại"
+          />
+        </div>
+        <div 
+          className="w-full border border-c-dark-brown/20"
+          style={{marginLeft: "-0.75rem"}}
+        ></div>
+        <div className="sub-menu pr-3">
+          <SubMenu 
+            item={subItem}
+            handleClick={(e: any) => {props.subItemClick(e)}}
+          />
+        </div>
       </div>
     </div>
   )

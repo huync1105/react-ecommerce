@@ -10,6 +10,7 @@ export default function NavBar(props: any) {
           className="mr-3 text-c-dark-brown"
           showIcon={true}
           icon="fas fa-filter"
+          handleClick={props.filterHandleClick}
         />
         <SearchBar 
           className="w-4/5"
@@ -24,7 +25,9 @@ export default function NavBar(props: any) {
           badge={2}
           badgeClassName="bg-c-dark-brown"
         />
-        <Avatar />
+        <Avatar 
+          
+        />
       </div>
     </div>
   )
