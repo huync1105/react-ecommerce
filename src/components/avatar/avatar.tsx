@@ -4,7 +4,7 @@ export default function Avatar(props: any) {
       <div 
         className="w-full h-full rounded-3xl overflow-hidden border-2 border-c-dark-brown cursor-pointer"
         style={{
-          backgroundImage: `url(${props.userImg?"https://pickaface.net/gallery/avatar/unr_randomavatar_170412_0236_9n4c2i.png":"https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/anonymous-512.png"})`,
+          backgroundImage: `url(${props.user.avatar?"https://pickaface.net/gallery/avatar/unr_randomavatar_170412_0236_9n4c2i.png":"https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/anonymous-512.png"})`,
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}

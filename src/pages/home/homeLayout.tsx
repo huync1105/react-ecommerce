@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ItemsList from "../../components/itemslist/itemlist";
 import NavBar from "../../components/navbar/navbar";
 import SideBar from "../../components/sidebar/sidebar";
@@ -8,32 +8,16 @@ import mainCategoryApi from "../../api/mainCategoryApi";
 import { handleHttpResponse } from "../../shared/function/globalfunction";
 import "./home-layout.css";
 import productsApi from "../../api/productsApi";
+import { UserContext } from "../../App";
 
 
 export default function HomeLayout(props: any) {
 
-  // let itemList = [
-  //   {
-  //     id: "1",
-  //     itemName: 'Laptop Acer Gaming Nitro 5 AN515-45-R6EV (Ryzen 5 5600H/8GB RAM/512GB/15.6"FHD 144Hz/GTX1650 4GB/Win 11/Đen)',
-  //     stars: 3,
-  //     comments: [
-  //       {
-  //         content: 'laptop oke'
-  //       },
-  //       {
-  //         content: 'laptop oke'
-  //       },
-  //     ],
-  //     price: 23000000,
-  //     sellUpPrice: 22000000,
-  //     img: 'https://laptop88.vn/media/product/5938_7247_5754_6922_7688_laptop_82jw00cqvn.jpg',
-  //   }
-  // ]
   const [categories, setCategories]:any = useState([]);
   const [item, setItem]: any = useState({});
   const [loading, setLoading] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
+  const {userVal, setUserVal}: any = useContext(UserContext);
 
   useEffect(() => {
     getCategories();
@@ -51,9 +35,7 @@ export default function HomeLayout(props: any) {
         }, () => {
           setLoading(false);
         })
-      } catch (err) {
-        
-      }
+      } catch (err) {}
     }
     fetchData().then(() => {
       getListProducts(categories[0].child[0]._id);
@@ -75,9 +57,7 @@ export default function HomeLayout(props: any) {
         }, () => {
           setLoading(false);
         })
-      } catch (err) {
-
-      }
+      } catch (err) {}
     }
     fetchData();
   }
@@ -89,12 +69,14 @@ export default function HomeLayout(props: any) {
         listItem={categories}
         handleClose={openSideBarAct}
         subItemClick={(e: any) => {getListProducts(e)}}
+        user={userVal}
       />
       <div className="navigation sticky z-10 flex justify-center w-full bg-white drop-shadow-md">
         <div className="container px-5">
           <NavBar 
             className="w-full p-2 grid grid-cols-12 gap-5" 
             filterHandleClick={openSideBarAct}
+            user={userVal}
           />
         </div>
       </div>
@@ -121,8 +103,8 @@ export default function HomeLayout(props: any) {
         pauseOnHover
       />
       <Loading 
-      className="z-30 top-0"
-      isLoading={loading} 
+        className="z-30 top-0"
+        isLoading={loading} 
       />
     </div>
   );

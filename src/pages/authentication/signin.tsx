@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import authenApi from "../../api/authenApi";
+import { UserContext } from "../../App";
 import SignBtn from "../../components/button/SignBtn";
 import Inputtext from "../../components/input/inputtext";
 import { handleHttpResponse } from "../../shared/function/globalfunction";
@@ -10,6 +11,7 @@ export default function SignIn(props: any) {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
   const { setLoading, toast }: any = useOutletContext();
+  const {userVal, setUserVal}: any = useContext(UserContext);
 
   const signIn = () => {
     setLoading(true);
@@ -19,6 +21,7 @@ export default function SignIn(props: any) {
         handleHttpResponse(response, toast, () => {
           setLoading(false);
           localStorage.setItem("token", response.data.accessToken);
+          setUserVal(response.data.userInfo);
           setTimeout(() => {
             navigate("home");
           }, 2000)

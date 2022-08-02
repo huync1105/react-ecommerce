@@ -26,7 +26,7 @@ export default function NavBar(props: any) {
           badgeClassName="bg-c-dark-brown"
         />
         <Avatar 
-          
+          user={props.user}
         />
       </div>
     </div>
