@@ -1,8 +1,16 @@
+import { useEffect, useState } from "react";
 import Avatar from "../avatar/avatar";
 import Button from "../button/button";
 import SearchBar from "../searchbar/searchbar";
 
 export default function NavBar(props: any) {
+
+  const sumCartItem = (cart: any) => {
+    return cart.reduce((total: any, item: any) => {
+      return total + item.quantity;
+    }, 0)
+  }
+
   return (
     <div className={props.className}>
       <div className="flex col-span-8">
@@ -22,8 +30,9 @@ export default function NavBar(props: any) {
           className="text-c-dark-brown mr-4"
           showIcon={true}
           icon="fas fa-shopping-cart"
-          badge={2}
+          badge={sumCartItem(props.cart)}
           badgeClassName="bg-c-dark-brown"
+          handleClick={props.showCartModal}
         />
         <Avatar 
           user={props.user}

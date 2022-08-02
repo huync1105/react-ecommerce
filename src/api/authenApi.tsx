@@ -9,6 +9,10 @@ export default function authenApi() {
     register: (data: any) => {
       const url = 'register';
       return axiosClient.post(url, data);
+    },
+    getById: (id: string) => {
+      const url = `user/getUserById/${id}`;
+      return axiosClient.get(url);
     }
   }
 }

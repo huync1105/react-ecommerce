@@ -5,6 +5,7 @@ import NumberFormat from "react-number-format";
 import { truncate } from "../../shared/function/globalfunction";
 
 interface ItemProps {
+  _id: string;
   className?: string;
   itemName: string;
   description?: string;
@@ -13,6 +14,7 @@ interface ItemProps {
   price: number;
   sellUpPrice?: number;
   img: string;
+  handleAdd?: any;
 }
 
 export default function Item(props: ItemProps) {
@@ -29,7 +31,7 @@ export default function Item(props: ItemProps) {
 
   return (
     <div
-      className={`w-full flex flex-col relative overflow-hidden bg-white drop-shadow-md ${props.className}`}
+      className={`w-full h-full flex flex-col relative overflow-hidden bg-white drop-shadow-md ${props.className}`}
     >
       <div
         className={`cr cr-top cr-left cr-sticky cr-red text-lg ${
@@ -39,9 +41,10 @@ export default function Item(props: ItemProps) {
         {countPercent(props.price, props.sellUpPrice)}%
       </div>
       <Button
-        className="absolute top-0 right-0 text-c-dark-brown bg-white text-2xl"
+        className="absolute top-2 right-2 text-c-dark-brown bg-white text-2xl hover:text-c-light-brown hover:bg-c-dark-brown transition-all"
         showIcon={true}
         icon="fas fa-cart-plus"
+        handleClick={() => props.handleAdd(props)}
       />
       <div
         className={`item-img w-full h-72 2xl:h-72 lg:h-52 sm:h-40 h-40 overflow-hidden mb-4`}

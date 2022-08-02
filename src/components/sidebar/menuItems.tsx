@@ -22,20 +22,6 @@ export default function MenuItems(props: any) {
       name: 'Tạp hóa',
       child: []
     },
-    // {
-    //   group: '', 
-    //   name: 'Trợ giúp và cài đặt',
-    //   child: [
-    //     {
-    //       _id: "TGVCD01",
-    //       name: 'Tài khoản của bạn' 
-    //     },
-    //     {
-    //       _id: "TGVCD02",
-    //       name: 'Đăng xuất' 
-    //     },
-    //   ]
-    // },
   ]
   const [isInChild, setIsInChild] = useState(false);
   const [subItem, setSubItem] = useState({});
@@ -56,7 +42,7 @@ export default function MenuItems(props: any) {
   
   return (
     <div className={`flex ${isInChild?"child-tab":""} ${props.className}`}>
-      <div className="w-1/2 pr-3">
+      <div className="w-1/2 pr-3 overflow-x-auto">
         {
           bigCategory.map((category: any) => {
             return (

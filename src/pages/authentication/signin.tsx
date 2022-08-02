@@ -21,6 +21,7 @@ export default function SignIn(props: any) {
         handleHttpResponse(response, toast, () => {
           setLoading(false);
           localStorage.setItem("token", response.data.accessToken);
+          localStorage.setItem("e_id_client", response.data.userInfo._id);
           setUserVal(response.data.userInfo);
           setTimeout(() => {
             navigate("home");
