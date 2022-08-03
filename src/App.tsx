@@ -5,6 +5,8 @@ import SignLayout from "./pages/authentication/signLayout";
 import SignIn from "./pages/authentication/signin";
 import SignUp from "./pages/authentication/signup";
 import HomeLayout from "./pages/home/homeLayout";
+import MainContent from "./pages/home/main/maincontent";
+import UserDetail from "./pages/home/userdetail/userdetail";
 
 export const UserContext = React.createContext({
   userVal: {},
@@ -26,7 +28,10 @@ function App() {
             <Route index element={<SignIn />}></Route>
             <Route path="/sign-up" element={<SignUp />}></Route>
           </Route>
-          <Route path="/home" element={<HomeLayout />}></Route>
+          <Route path="/home" element={<HomeLayout />}>
+            <Route index element={<MainContent />}></Route>
+            <Route path="user" element={<UserDetail />}></Route>
+          </Route>
         </Routes>
       </UserContext.Provider>
     </HashRouter>

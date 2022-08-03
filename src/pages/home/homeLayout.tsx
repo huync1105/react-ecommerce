@@ -9,8 +9,8 @@ import { handleHttpResponse } from "../../shared/function/globalfunction";
 import "./home-layout.css";
 import productsApi from "../../api/productsApi";
 import authenApi from "../../api/authenApi";
-import { DropDown } from "../../components/input/dropdown";
 import CartModal from "../../components/cartmodal/cartmodal";
+import { Outlet } from "react-router-dom";
 
 
 export default function HomeLayout(props: any) {
@@ -20,7 +20,7 @@ export default function HomeLayout(props: any) {
   const [loading, setLoading] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
   const [openCartModal, setOpenCartModal] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser]: any = useState({});
   const [cart, setCart]: any = useState([]);
 
   useEffect(() => {
@@ -78,47 +78,12 @@ export default function HomeLayout(props: any) {
     fetchData();
   }
 
-  const sortItems = (e: any) => {
-    switch (e) {
-      case "NAME":
-        item.listItems.sort();
-        setItem({...item});
-        break;
-      case "PRICE":
-        item.listItems.sort((a: any, b: any) => {
-          return a.price - b.price;
-        });
-        setItem({...item});
-        break;
-      case "RATE":
-        item.listItems.sort((a: any, b: any) => {
-          return a.stars - b.stars;
-        });
-        setItem({...item});
-        break;
-    }
-  }
-
-  const addTocart = (e: any) => {
-    let index = cart.findIndex((item: any) => item._id === e._id);
-    if (index === -1) {
-      cart.push({...e, quantity: 1});
-      setCart([...cart]);
-    } 
-    else {
-      cart[index].quantity += 1;
-      setCart([...cart]);
-    }
-    console.log("cart", cart);
-    
-  }
-
   return (
     <div 
       className="w-full"
     >
       <SideBar
-        className={`side-bar z-20 ${openSideBar?"is-open":""}`}
+        className={`side-bar z-50 ${openSideBar?"is-open":""}`}
         listItem={categories}
         handleClose={openSideBarAct}
         subItemClick={(e: any) => {getListProducts(e)}}
@@ -143,22 +108,7 @@ export default function HomeLayout(props: any) {
           }
         </div>
       </div>
-      <div className="content w-full flex justify-center">
-        <div className="container px-5">
-          <div className="flex justify-between items-center py-4">
-            <span className="text-2xl font-semibold">{item.name}</span>
-            <DropDown 
-              className="z-20"
-              handleSelect={(e: any)=>{sortItems(e)
-              }}
-            />
-          </div>
-          <ItemsList
-            list={item.listItems}
-            addToCart={(e: any) => addTocart(e)}
-          />
-        </div>
-      </div>
+      <Outlet context={{ cart, setCart, item, setItem, user, setUser }} />
       <ToastContainer
         position="top-center"
         autoClose={2000}
