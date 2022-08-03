@@ -71,7 +71,7 @@ export default function SignIn(props: any) {
         btnTitle="Sign Up"
         btnClassName="bg-sign-light-green text-sign-dark-green"
         handleBtnClick={() => {
-          navigate("sign-up");
+          navigate("/sign-up");
         }}
       />
     </div>

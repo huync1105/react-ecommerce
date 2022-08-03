@@ -26,7 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignLayout />}>
             <Route index element={<SignIn />}></Route>
-            <Route path="/sign-up" element={<SignUp />}></Route>
+            <Route path="sign-up" element={<SignUp />}></Route>
           </Route>
           <Route path="/home" element={<HomeLayout />}>
             <Route index element={<MainContent />}></Route>

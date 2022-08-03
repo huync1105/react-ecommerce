@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "../avatar/avatar";
 import Button from "../button/button";
 import SearchBar from "../searchbar/searchbar";
@@ -10,6 +11,8 @@ export default function NavBar(props: any) {
       return total + item.quantity;
     }, 0)
   }
+
+  const navigate = useNavigate()
 
   return (
     <div className={props.className}>
@@ -36,6 +39,7 @@ export default function NavBar(props: any) {
         />
         <Avatar 
           user={props.user}
+          handleClick={() => navigate('user')}
         />
       </div>
     </div>

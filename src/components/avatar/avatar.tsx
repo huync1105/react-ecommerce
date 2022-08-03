@@ -1,6 +1,9 @@
 export default function Avatar(props: any) {
   return (
-    <div className={`w-9 h-9 ${props.className}`}>
+    <div 
+    className={`w-9 h-9 ${props.className}`}
+    onClick={props.handleClick}
+    >
       <div 
         className="w-full h-full rounded-3xl overflow-hidden cursor-pointer"
         style={{
