@@ -13,6 +13,10 @@ export default function authenApi() {
     getById: (id: string) => {
       const url = `user/getUserById/${id}`;
       return axiosClient.get(url);
+    },
+    update: (data: any) => {
+      const url = `user/update/${data._id}`;
+      return axiosClient.patch(url, data);
     }
   }
 }

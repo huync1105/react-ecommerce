@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../button/button";
 import "./menu-item.css"
 import SubMenu from "./submenu";
@@ -25,7 +26,7 @@ export default function MenuItems(props: any) {
   ]
   const [isInChild, setIsInChild] = useState(false);
   const [subItem, setSubItem] = useState({});
-
+  const navigate = useNavigate();
 
   const mapItems = () => {
     bigCategory.forEach((item: any) => {
@@ -39,6 +40,7 @@ export default function MenuItems(props: any) {
     setIsInChild(!isInChild);
     if (e) setSubItem(e);
   }
+
   
   return (
     <div className={`flex ${isInChild?"child-tab":""} ${props.className}`}>
@@ -71,12 +73,17 @@ export default function MenuItems(props: any) {
           <h2 className="text-xl font-semibold py-2">Trợ giúp & Cài đặt</h2>
           <div 
             className="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+            onClick={() => navigate('user')}
           >
             <span>Tài khoản của bạn</span>
             <i className="fas fa-angle-right"></i>
           </div>
           <div 
             className="flex justify-between items-center py-2 px-1 rounded cursor-pointer hover:bg-c-dark-brown/20"
+            onClick={() => {
+              navigate('/');
+              localStorage.clear();
+            }}
           >
             <span>Đăng xuất</span>
             <i className="fas fa-angle-right"></i>

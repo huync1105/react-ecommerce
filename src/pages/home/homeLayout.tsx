@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ItemsList from "../../components/itemslist/itemlist";
 import NavBar from "../../components/navbar/navbar";
 import SideBar from "../../components/sidebar/sidebar";
 import { ToastContainer, toast } from "react-toastify";
@@ -108,7 +107,7 @@ export default function HomeLayout(props: any) {
           }
         </div>
       </div>
-      <Outlet context={{ cart, setCart, item, setItem, user, setUser }} />
+      <Outlet context={{ cart, setCart, item, setItem, user, setUser, setLoading }} />
       <ToastContainer
         position="top-center"
         autoClose={2000}

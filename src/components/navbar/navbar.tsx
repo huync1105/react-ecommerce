@@ -20,6 +20,12 @@ export default function NavBar(props: any) {
         <Button 
           className="mr-3 text-c-dark-brown"
           showIcon={true}
+          icon="fas fa-home"
+          handleClick={() => navigate('')}
+        />
+        <Button 
+          className="mr-3 text-c-dark-brown"
+          showIcon={true}
           icon="fas fa-filter"
           handleClick={props.filterHandleClick}
         />
