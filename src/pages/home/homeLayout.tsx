@@ -68,7 +68,7 @@ export default function HomeLayout(props: any) {
         const res = await productsApi().getProductsByCatId(e);
         handleHttpResponse(res, toast, () => {
           setLoading(false);
-          setItem(res.data.data[0]);
+          setItem(res.data.data);
         }, () => {
           setLoading(false);
         })
