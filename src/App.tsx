@@ -7,6 +7,7 @@ import SignUp from "./pages/authentication/signup";
 import HomeLayout from "./pages/home/homeLayout";
 import MainContent from "./pages/home/main/maincontent";
 import UserDetail from "./pages/home/userdetail/userdetail";
+import ItemDetail from "./pages/home/itemdetail/itemdetail";
 
 export const UserContext = React.createContext({
   userVal: {},
@@ -31,6 +32,7 @@ function App() {
           <Route path="/home" element={<HomeLayout />}>
             <Route index element={<MainContent />}></Route>
             <Route path="user" element={<UserDetail />}></Route>
+            <Route path="item/:id" element={<ItemDetail />}></Route>
           </Route>
         </Routes>
       </UserContext.Provider>

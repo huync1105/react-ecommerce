@@ -12,11 +12,17 @@ export default function NavBar(props: any) {
     }, 0)
   }
 
+  const [value, setValue] = useState(sumCartItem(props.cart));
+
+  useEffect(() => {
+    setValue(sumCartItem(props.cart));
+  }, [props.cart])
+
   const navigate = useNavigate()
 
   return (
     <div className={props.className}>
-      <div className="flex col-span-8">
+      <div className="flex col-span-4 sm:col-span-4 md:col-span-4 xl:col-span-8 2xl:col-span-8">
         <Button 
           className="mr-3 text-c-dark-brown"
           showIcon={true}
@@ -32,6 +38,7 @@ export default function NavBar(props: any) {
         <SearchBar 
           className="w-4/5"
           placeholder="Tìm kiếm..."
+          emitRes={(e: any) => props.emitSearchRes(e)}
         />
       </div>
       <div className="col-span-4 flex justify-end items-center">
@@ -39,7 +46,7 @@ export default function NavBar(props: any) {
           className="text-c-dark-brown mr-4"
           showIcon={true}
           icon="fas fa-shopping-cart"
-          badge={sumCartItem(props.cart)}
+          badge={value}
           badgeClassName="bg-c-dark-brown"
           handleClick={props.showCartModal}
         />

@@ -8,29 +8,39 @@ import { handleHttpResponse } from "../../shared/function/globalfunction";
 export default function SignUp(props: any) {
 
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const [user, setUser]: any = useState({});
   const { setLoading, toast }: any = useOutletContext();
 
+  const validate = () => {
+    if (user.password !== user.rePassword) {
+      toast.error('Mật khẩu nhập lại không đúng!');
+      return false;
+    }
+    return true
+  }
+
   const signUp = () => {
-    setLoading(true);
-    const fetchLogin = async () => {
-      try {
-        const response: any = await authenApi().register(user);
-        handleHttpResponse(response, toast, () => {
+    if (validate()) {
+      setLoading(true);
+      const fetchLogin = async () => {
+        try {
+          const response: any = await authenApi().register(user);
+          handleHttpResponse(response, toast, () => {
+            setLoading(false);
+            setTimeout(() => {
+              navigate("/");
+            }, 2000)
+          }, () => {
+            setLoading(false);
+          })
+          // }
+        } catch (err) {
           setLoading(false);
-          setTimeout(() => {
-            navigate("/");
-          }, 2000)
-        }, () => {
-          setLoading(false);
-        })
-        // }
-      } catch (err) {
-        setLoading(false);
-        toast.error(`${err}`);
-      }
-    };
-    fetchLogin();
+          toast.error(`${err}`);
+        }
+      };
+      fetchLogin();
+    }
   };
 
   return (

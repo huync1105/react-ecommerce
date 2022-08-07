@@ -5,6 +5,7 @@ interface Props {
   value?: any;
   handleFocus?: any;
   handleBlur?: any;
+  handleOnKeyUp?: any;
 }
 
 export default function Inputtext(props: Props) {
@@ -18,6 +19,7 @@ export default function Inputtext(props: Props) {
         onChange={props.handleChange}
         onFocus={props.handleFocus}
         onBlur={props.handleBlur}
+        onKeyUp={(e: any) => props.handleOnKeyUp(e)}
       />
     </div>
   );

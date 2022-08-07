@@ -110,7 +110,10 @@ export default function MenuItems(props: any) {
         <div className="sub-menu pr-3">
           <SubMenu 
             item={subItem}
-            handleClick={(e: any) => {props.subItemClick(e)}}
+            handleClick={(e: any) => {
+              props.subItemClick(e);
+              navigate('../home', {replace: true});
+            }}
           />
         </div>
       </div>

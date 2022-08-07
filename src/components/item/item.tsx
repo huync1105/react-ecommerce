@@ -15,6 +15,8 @@ interface ItemProps {
   sellUpPrice?: number;
   img: string;
   handleAdd?: any;
+  handleClick?: any;
+  hideAddToCart?: boolean;
 }
 
 export default function Item(props: ItemProps) {
@@ -31,7 +33,7 @@ export default function Item(props: ItemProps) {
 
   return (
     <div
-      className={`w-full h-full flex flex-col relative overflow-hidden bg-white drop-shadow-md ${props.className}`}
+      className={`w-full h-full flex flex-col relative overflow-hidden bg-white drop-shadow-md cursor-pointer ${props.className}`}
     >
       <div
         className={`cr cr-top cr-left cr-sticky cr-red text-lg ${
@@ -40,17 +42,21 @@ export default function Item(props: ItemProps) {
       >
         {countPercent(props.price, props.sellUpPrice)}%
       </div>
-      <Button
+      {props.hideAddToCart?undefined:(<Button
         className="absolute top-2 right-2 text-c-dark-brown bg-white text-2xl hover:text-c-light-brown hover:bg-c-dark-brown transition-all"
         showIcon={true}
         icon="fas fa-cart-plus"
         handleClick={() => props.handleAdd(props)}
-      />
+      />)}
       <div
         className={`item-img w-full h-72 2xl:h-72 lg:h-52 sm:h-40 h-40 overflow-hidden mb-4`}
         style={itemImgStyle}
+        onClick={props.handleClick}
       ></div>
-      <div className={`item-content p-3`}>
+      <div 
+        className={`item-content p-3`}
+        onClick={props.handleClick}
+      >
         <p className="">
           {truncate(props.itemName, 60)}
         </p>

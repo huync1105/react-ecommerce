@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { truncate } from "../../shared/function/globalfunction"
 import Button from "../button/button"
 
@@ -7,17 +7,22 @@ export default function CartModal(props: any) {
   const [cart, setCart] = useState(props.listItem || []);
   const changeQuantity = (e: any, item: any) => {
     if (e === 'plus') {
-      item.quantity += 1;
-      setCart([...cart]);
+      item.quantity ++;
+      // setCart([...cart]);
     } else {
-      item.quantity -= 1;
+      item.quantity --;
       if (item.quantity < 1) {
         let index = cart.findIndex((element: any) => element._id === item._id);
         cart.splice(index, 1);
       }
-      setCart([...cart]);
     }
+    setCart([...cart]);
+    props.handleOnChange(cart);
   }
+
+  useEffect(() => {
+    setCart(props.listItem);
+  }, [props.listItem])
 
   return (
     <div className={`w-96 h-52 overflow-y-auto bg-white drop-shadow-md rounded-md ${props.className}`}>

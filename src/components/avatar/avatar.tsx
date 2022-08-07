@@ -7,7 +7,7 @@ export default function Avatar(props: any) {
       <div 
         className="w-full h-full rounded-3xl overflow-hidden cursor-pointer"
         style={{
-          backgroundImage: `url(${props.user?props.user.avatar:"https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/anonymous-512.png"})`,
+          backgroundImage: `url(${props.user.avatar?props.user.avatar:"https://cdn2.iconfinder.com/data/icons/social-flat-buttons-3/512/anonymous-512.png"})`,
           backgroundSize: "cover",
           backgroundPosition: "center"
         }}

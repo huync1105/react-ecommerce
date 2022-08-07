@@ -10,12 +10,15 @@ import productsApi from "../../api/productsApi";
 import authenApi from "../../api/authenApi";
 import CartModal from "../../components/cartmodal/cartmodal";
 import { Outlet } from "react-router-dom";
+import SearchModal from "../../components/searchmodal/searchmodal";
 
 
 export default function HomeLayout(props: any) {
 
   const [categories, setCategories]:any = useState([]);
   const [item, setItem]: any = useState({});
+  const [search, setSearch]: any = useState([]);
+  const [showSearchModal, setShowSearchModal]: any = useState(false);
   const [loading, setLoading] = useState(false);
   const [openSideBar, setOpenSideBar] = useState(false);
   const [openCartModal, setOpenCartModal] = useState(false);
@@ -26,7 +29,7 @@ export default function HomeLayout(props: any) {
     getCategories();
     getCurrentUser();
   }, []);
-
+  
   const getCurrentUser = () => {
     let userId = localStorage.getItem("e_id_client");
     const fetchData = async () => {
@@ -81,6 +84,10 @@ export default function HomeLayout(props: any) {
     <div 
       className="w-full"
     >
+      <div 
+        className={`w-full h-full fixed z-50 bg-black/40 ${openSideBar?"":"hidden"}`}
+        onClick={() => setOpenSideBar(false)}
+      ></div>
       <SideBar
         className={`side-bar z-50 ${openSideBar?"is-open":""}`}
         listItem={categories}
@@ -88,12 +95,22 @@ export default function HomeLayout(props: any) {
         subItemClick={(e: any) => {getListProducts(e)}}
         user={user}
       />
+      {showSearchModal?(
+        <SearchModal
+          value={search}
+          handleClose={() => setShowSearchModal(false)}
+        />
+      ):undefined}
       <div className="navigation sticky z-40 flex justify-center w-full bg-white drop-shadow-md">
         <div className="container relative px-5">
           <NavBar 
-            className="w-full p-2 grid grid-cols-12 gap-5" 
+            className="w-full p-2 grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 xl:grid-cols-12 2xl:grid-cols-12 gap-5" 
             filterHandleClick={openSideBarAct}
             showCartModal={() => setOpenCartModal(!openCartModal)}
+            emitSearchRes={(e: any) => {
+              setSearch(e);
+              setShowSearchModal(true)
+            }}
             user={user}
             cart={cart}
           />
@@ -102,6 +119,7 @@ export default function HomeLayout(props: any) {
               <CartModal 
                 className="absolute right-5"
                 listItem={cart}
+                handleOnChange={(e: any) => {setCart(e)}}
               />
             ):undefined
           }

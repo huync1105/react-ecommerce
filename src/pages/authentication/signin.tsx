@@ -50,12 +50,22 @@ export default function SignIn(props: any) {
           handleChange={(e: any) => {
             setUser({ ...user, email: e.target.value });
           }}
+          handleOnKeyUp={(e: any) => {
+            if (e.key === 'Enter') {
+              signIn();
+            }
+          }}
         />
         <Inputtext
           inputPlaceholder="Password"
           isPassword={true}
           handleChange={(e: any) => {
             setUser({ ...user, password: e.target.value });
+          }}
+          handleOnKeyUp={(e: any) => {
+            if (e.key === 'Enter') {
+              signIn();
+            }
           }}
         />
       </div>

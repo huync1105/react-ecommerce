@@ -9,7 +9,9 @@ export default function MainContent(props: any) {
   const sortItems = (e: any) => {
     switch (e) {
       case "NAME":
-        item.listItems.sort();
+        item.listItems.sort((a: any, b: any) => {
+          return a.itemName.localeCompare(b.itemName);
+        });
         setItem({...item});
         break;
       case "PRICE":
